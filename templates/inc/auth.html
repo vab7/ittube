@@ -1,0 +1,11 @@
+{% if not user.is_authenticated %}
+<div class="user-form">
+   <a href="{% url 'register_user' %}" class="sign-up">Регистрация</a>
+   <a href="{% url 'login_user' %}" class="log-in">Войти</a>
+</div>
+{% else %}
+<div class="user-form">
+   <p class="user-name lp">{{ user }}</p>
+   <a href="{% url 'logout_user' %}" class="log-out">Выйти</a>
+</div>
+{% endif %}

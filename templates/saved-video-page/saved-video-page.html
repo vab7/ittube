@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block js %}
+<script src="{% static 'js/video-content.js' %}"></script>
+<script src="{% static 'js/header.js' %}"></script>
+{% endblock js %}
+
+{% block content %}
+
+<section class="video-content">
+   <div class="container">
+      <div class="seved-video">
+         <h1 class="video-content-title">{{ title }}</div>
+
+         <ul class="video-content-container infinite-container">
+            {% for video in saved_video %}
+               {% include 'inc/video-suggestion.html'%}
+            {% endfor %}
+         </ul>
+      </div>
+
+      <div class="loader-container">
+         <div class="loader-ul-content"></div>
+      </div>
+
+      {% if page_obj.has_next %}
+         <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+      {% endif %}
+   </div>
+</section>
+
+{% endblock content %}

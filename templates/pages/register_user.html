@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Регистрация | Порно Нет
+{% endblock title %}
+
+{% block js %}
+<script src="{% static 'js/header.js' %}"></script>
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock js %}
+
+{% block content %}
+{% include 'inc/register.html' %}
+{% endblock content %}

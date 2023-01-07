@@ -1,0 +1,14 @@
+<li class="category-item-container infinite-item">
+   <a href="{{ category.get_absolute_url }}">
+      <div class="category-img-container">
+         <img
+            src="{% if category.image %}{{ category.image.url }}{% else %}{{ '/static/images/category.jpg' }}{% endif %}"
+            class="category-img"
+            alt="{{ category.title }}"
+            loading="lazy"
+         />
+      </div>
+      <div class="shadow-category"></div>
+      <span class="category-item-title">{{ category.title }}</span>
+   </a>
+</li>

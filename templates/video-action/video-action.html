@@ -1,0 +1,187 @@
+{% load it_tags %}
+<section class="video-action-section">
+  <div class="container">
+    <div class="video-action-container">
+      <div class="tags-container">
+        {% for tag in video.tags.all %}
+        <span class="tag">#{{ tag }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="video-action-title-container">
+        <h1 class="video-action-title">{{ video.title }}</h1>
+      </div>
+
+      <div class="video-info-action-container">
+        <span class="video-info-views">
+          {{ video.fake_views|views:"views" }}
+        </span>
+        <span class="point">•</span>
+        <div class="likes-container">
+          <span class="action-thumb_up">
+            {% include 'inc/images/thumb_up_fill.html' %}
+          </span>
+          <span class="video-percent-likes">
+            {{ video.fake_likes|percent:video.fake_dislikes }}%
+          </span>
+        </div>
+        <span class="point">•</span>
+        <div class="video-added-on-container">
+          <span class="video-added-on"> {{ video.added_on|added }} назад </span>
+        </div>
+      </div>
+
+      <div class="video-action-user-container">
+        <form
+          onsubmit="return addVideoLike('{{ csrf_token }}', '{{ video.pk }}')"
+          class="like-form"
+        >
+          {% csrf_token %}
+          <button
+            type="button"
+            onclick="addVideoLike('{{ csrf_token }}', '{{ video.pk }}')"
+            class="action-user-button button-like"
+          >
+            <span class="like-icon">
+              <span
+                class="like-i icon-action {% if not like_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/thumb_up.html' %}
+              </span>
+              <span
+                class="like-i-fill icon-action {% if like_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/thumb_up_fill.html' %}
+              </span>
+            </span>
+            <span class="like-value value-action"
+              >{{ video.fake_likes|views:'likes' }}</span
+            >
+          </button>
+        </form>
+        <form
+          onsubmit="return addVideoDislike('{{ csrf_token }}', '{{ video.pk }}')"
+          class="dislike-form"
+        >
+          {% csrf_token %}
+          <button
+            type="button"
+            onclick="addVideoDislike('{{ csrf_token }}', '{{ video.pk }}')"
+            class="action-user-button button-dislike"
+          >
+            <span class="dislike-icon">
+              <span
+                class="dislike-i icon-action {% if not dislike_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/thumb_down.html' %}
+              </span>
+              <span
+                class="dislike-i-fill icon-action {% if dislike_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/thumb_down_fill.html' %}
+              </span>
+            </span>
+            <span class="dislike-value value-action"
+              >{{ video.fake_dislikes|views:'likes' }}</span
+            >
+          </button>
+        </form>
+        <form
+          onsubmit="return addVideoFavorite('{{ csrf_token }}', '{{ video.pk }}')"
+          class="favorite-form"
+        >
+          {% csrf_token %}
+          <button
+            type="button"
+            onclick="addVideoFavorite('{{ csrf_token }}', '{{ video.pk }}')"
+            class="action-user-button button-favorite"
+          >
+            <span class="favorite-icon">
+              <span
+                class="favorite-i icon-action {% if not favorite_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/favorite.html' %}
+              </span>
+              <span
+                class="favorite-i-fill icon-action {% if favorite_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/favorite_fill.html' %}
+              </span>
+            </span>
+            <span class="value-action favorite-count"
+              >{{ video.fake_favorites|views:'likes' }}</span
+            >
+          </button>
+        </form>
+        <button class="action-user-button button-share">
+          <span class="share-icon icon-action">
+            {% include 'inc/images/share.html' %}
+          </span>
+          <span class="value-action">поделиться</span>
+        </button>
+      </div>
+
+      <div class="video-channel-action-container">
+        <a href="{{ video.channel.get_absolute_url }}">
+          <div class="channel-action-container">
+            <div class="icon-channel-img suggestion-channel-img">
+              <img
+                src="{{ video.channel.icon.url }}"
+                class="video-channel-icon"
+                alt=""
+              />
+            </div>
+            <div class="channel-info-container">
+              <div class="channel-action-title-container">
+                <span class="channel-action-title"> {{ video.channel }} </span>
+                <span class="channel-check-icon check">
+                  {% include 'inc/images/check.html' %}
+                </span>
+              </div>
+              <div class="channel-count-subscribers-container">
+                <span class="channel-subscribers-count">
+                  {{video.channel.fake_subscribers|views:'subscribers'}}
+                  подписчиков
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <form
+          class="subscribe-form"
+          onsubmit="return subscribeUserChannel('{{ csrf_token }}', '{{ video.channel.pk }}')"
+        >
+          {% csrf_token %}
+          <button
+            type="button"
+            onclick="subscribeUserChannel('{{ csrf_token }}', '{{ video.channel.pk }}')"
+            class="channel-action-subscribe-button {% if subscribe_status %}subscribe-active{% endif %}"
+          >
+            {% if subscribe_status %}
+            <!---->
+            вы подписаны
+            <!---->
+            {% else %}
+            <!---->
+            подписаться
+            <!---->
+            {% endif %}
+          </button>
+        </form>
+      </div>
+
+      <div class="show-hide-about-video-container">
+        <div class="button-show-hide-container">
+          <div class="first-line"></div>
+          <div class="button-show-hide">показать описание</div>
+          <div class="second-line"></div>
+        </div>
+      </div>
+
+      <div class="choose-user-content-container">
+        <div class="category button-comment">Комментарии</div>
+        <div class="category button-suggestion">Видео</div>
+      </div>
+    </div>
+  </div>
+</section>

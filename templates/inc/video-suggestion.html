@@ -1,0 +1,75 @@
+{% load it_tags %}
+<li class="video infinite-item">
+  <a href="{{ video.get_absolute_url }}" class="video-link">
+    <div class="video-container">
+      <img
+        src="{{ video.poster.url }}"
+        class="video-poster infinite-video-poster poster visible-video"
+        alt="{{ video.title }}"
+        style="display: none"
+        height="180"
+      />
+
+      <img
+        src="{{ video.thumb_short.url }}"
+        style="display: none"
+        class="thumb-short-content"
+        alt="{{ video.title }}"
+      />
+
+      <div class="duration-video">{{ video.duration }}</div>
+    </div>
+  </a>
+
+  <div class="video-container-info">
+    <a href="{{ video.channel.get_absolute_url }}">
+      <div class="icon-channel-img suggestion-channel-img">
+        <img
+          src="{{ video.channel.icon.url }}"
+          class="video-channel-icon"
+          alt="{{ video.channel.title }}"
+        />
+      </div>
+    </a>
+    <div class="video-info-container">
+      <a href="{{ video.get_absolute_url }}" class="video-title-link">
+        <h2 class="video-title">{{ video.title }}</h2>
+      </a>
+      <a href="{{ video.channel.get_absolute_url }}" class="video-channel-link">
+        <div class="channel-container">
+          <div class="video-channel-title-container">
+            <span class="video-channel">{{ video.channel }}</span>
+            <span class="channel-check-icon check">
+              {% include 'inc/images/check.html' %}
+            </span>
+            {% comment %}
+            <span class="channel-check-icon popular">
+              {% include 'inc/images/popular.html' %}
+            </span>
+            {% endcomment %}
+          </div>
+        </div>
+      </a>
+      <div class="video-info">
+        <span class="video-all-views">
+          {{ video.fake_views|views:'views' }}
+        </span>
+        <span class="point">•</span>
+        <div class="likes-container">
+          <span class="action-thumb_up">
+            {% include 'inc/images/thumb_up_fill.html' %}
+          </span>
+          <span class="video-percent-likes">
+            {{ video.likes.count|percent:video.dislikes.count }}%
+          </span>
+        </div>
+        <span class="point">•</span>
+        <div class="video-added-on-container">
+          <span class="video-added-on">
+            {{ video.updated_on|added }} назад
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

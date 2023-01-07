@@ -1,0 +1,46 @@
+<hr>
+<div class="categories-section">
+   <div class="container">
+      <div class="horizontal-scroll">
+         {% if categories.count %}
+         <button
+            class="btn-scroll lp"
+            id="btn-scroll-left"
+            aria-label="side-left"
+            onclick="scrollHorizontally(1);"
+         >
+            <i class="chevron-icon chevron-left">
+               {% include 'inc/images/side.html' %}
+            </i>
+         </button>
+         <button
+            class="btn-scroll lp"
+            id="btn-scroll-right"
+            aria-label="side-right"
+            onclick="scrollHorizontally(-1);"
+         >
+            <i class="chevron-icon chevron-right">
+               {% include 'inc/images/side.html' %}
+            </i>
+         </button>
+         {% endif %}
+         <div class="categories-container">
+            <a href="{% url 'home_page' %}"
+               class="category-link {% if path == "" %}category-active{% endif %}"
+               aria-label="category-home"
+            >
+               <div class="category">новые</div>
+            </a>
+            {% for category in categories %}
+               <a href="{{ category.get_absolute_url }}"
+                  class="category-link {% if path == category.slug %}category-active{% endif %}"
+                  aria-label="category-button"
+               >
+                  <div class="category">{{ category.title }}</div>
+               </a>
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+</div>
+<hr />

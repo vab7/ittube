@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+<!---->
+
+{% load it_tags %}
+<!---->
+
+{% load static %}
+<!---->
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/category.css' %}" />
+{% endblock css %}
+<!---->
+
+{% block js %}
+<!---->
+
+<script src="{% static 'js/video-content.js' %}"></script>
+<script src="{% static 'js/header.js' %}"></script>
+<script src="{% static 'js/category.js' %}"></script>
+<!---->
+
+{% endblock js %}
+<!---->
+
+{% block title %}{{ title }}{% endblock title %}
+<!---->
+
+{% block category %}{% get_categories request %}{% endblock category %}
+<!---->
+
+{% block content %}
+<!---->
+{% include 'inc/video_content.html' %}
+<!---->
+{% endblock content %}

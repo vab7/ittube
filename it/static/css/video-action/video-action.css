@@ -1,0 +1,250 @@
+.video-action-section-container {
+   width: 100%;
+}
+
+.video-suggestion-container {
+   display: none;
+}
+
+.video-action-section .container {
+   padding: 10px 17px 17px 17px;
+}
+
+.tags-container {
+   display: flex;
+   flex-wrap: wrap;
+   max-height: 15px;
+   overflow: hidden;
+}
+
+.video-action-container {
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+}
+
+.tag {
+   font-family: sans-serif;
+   color: var(--primary-color);
+   font-size: 13px;
+   margin-right: 5px;
+}
+
+.action-thumb_up {
+   width: 16px;
+   height: 16px;
+}
+
+.action-thumb_up svg {
+   width: 16px;
+   height: 16px;
+}
+
+.video-action-title-container {
+   max-width: 90%;
+   max-height: 40px;
+   overflow: hidden;
+}
+
+.video-action-title {
+   color: var(--third-color);
+   font-family: sans-serif;
+   font-weight: 500;
+}
+
+.video-info-action-container {
+   display: flex;
+   /* gap: 5px; */
+   font-size: 13px;
+   margin: 2px 0;
+}
+
+.channel-subscribers-count {
+   color: var(--secondary-color);
+   font-family: sans-serif;
+   font-size: 13px;
+}
+
+.video-action-user-container {
+   width: 100%;
+   display: flex;
+   justify-content: space-around;
+   margin: 10px 0;
+}
+
+.action-user-button {
+   cursor: pointer;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   background: transparent;
+   border: none;
+}
+
+.action-user-button .material-symbols-rounded {
+   font-size: 26px;
+}
+
+.channel-action-container {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+.video-channel-action-container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin: 5px 0;
+}
+
+.channel-action-container .icon-channel-img {
+   width: 40px;
+   height: 40px;
+}
+
+.channel-info-container {
+   display: flex;
+   flex-direction: column;
+}
+
+.channel-action-title-container {
+   display: flex;
+   align-items: center;
+   gap: 3px;
+}
+
+.channel-action-title {
+   max-width: 90px;
+   color: var(--third-color);
+   font-family: sans-serif;
+   font-weight: bold;
+   font-size: 14px;
+}
+
+.channel-action-subscribe-button,
+.channel-main-action-subscribe-button {
+   cursor: pointer;
+   text-transform: uppercase;
+   font-size: 16px;
+   background: var(--primary-color);
+   color: var(--third-color);
+   padding: 5px 15px;
+   border-radius: 50px;
+   border: var(--default-border);
+}
+
+.show-hide-about-video-container {
+   margin: 10px 0;
+}
+
+.button-show-hide-container {
+   display: flex;
+   align-items: center;
+}
+
+.button-show-hide {
+   cursor: pointer;
+   font-size: 10px;
+   white-space: nowrap;
+   color: var(--secondary-color);
+   font-family: sans-serif;
+   text-transform: uppercase;
+}
+
+.first-line {
+   width: 25%;
+   height: 1px;
+   margin: 0 10px 0 -17px;
+   background: var(--transparent);
+}
+
+.second-line {
+   width: 75%;
+   height: 1px;
+   margin: 0 -17px 0 10px;
+   background: var(--transparent);
+}
+
+.choose-user-content-container {
+   display: flex;
+   gap: 10px;
+   margin: 5px 0;
+   font-size: 13px;
+   font-family: sans-serif;
+}
+
+.value-action {
+   color: var(--secondary-color);
+   font-family: sans-serif;
+}
+
+.icon-action svg {
+   width: 30px !important;
+   height: 30px !important;
+}
+
+.button-comment {
+   background: var(--primary-color);
+}
+
+.video-action-icon-active {
+   font-variation-settings: "FILL" 1 !important;
+}
+
+.subscribe-active {
+   background: transparent;
+   color: var(--secondary-color);
+}
+
+.channel-count-subscribers-container {
+   display: flex;
+   gap: 3px;
+   align-items: center;
+}
+
+.loader-suggestion-container {
+   position: relative;
+}
+
+.video-info-views {
+   color: var(--secondary-color);
+   font-family: sans-serif;
+}
+
+@media screen and (min-width: 588px) {
+   .channel-action-title {
+      max-width: 300px;
+   }
+}
+
+@media screen and (min-width: 992px) {
+   .main-section-container {
+      display: flex;
+   }
+
+   .choose-user-content-container {
+      display: none;
+   }
+
+   .video-suggestion-container {
+      display: flex;
+      flex-direction: column;
+   }
+
+   .video-suggestion-container .video-content-container {
+      width: 350px;
+      flex-direction: column;
+      margin: 17px 0 17px 17px;
+   }
+
+   .video-suggestion-container .video-content-container .video {
+      max-width: 100% !important;
+   }
+}
+
+@media screen and (min-width: 1160px) {
+   .video-suggestion-container .video-content-container .video {
+      max-width: 100% !important;
+   }
+}

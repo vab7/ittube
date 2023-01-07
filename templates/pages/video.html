@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% load static %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/video-player/video-player.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'css/p-video/p-video.css' %}" />
+<link
+  rel="stylesheet"
+  href="{% static 'css/video-action/video-action.css' %}"
+/>
+<link
+  rel="stylesheet"
+  href="{% static 'css/video-comment/video-comment.css' %}"
+/>
+{% endblock css %} {% block js %}
+<script src="{% static 'js/video-content.js' %}"></script>
+<script src="{% static 'js/header.js' %}"></script>
+<script src="{% static 'js/video-player.js' %}"></script>
+<script src="{% static 'js/video-action.js' %}"></script>
+<script src="{% static 'js/video-suggestion.js' %}"></script>
+<script src="{% static 'js/comment.js' %}"></script>
+{% endblock js %}
+
+<!---->
+{% block title %} {{ title }}{% endblock title %}
+<!-- video section -->
+{% block content %}
+<section class="p-video-section">
+  <div class="container">
+    <div class="p-video-container">
+      <div class="p-content">
+        <!-- video player -->
+        {% include 'video-player/video-player.html' %}
+      </div>
+
+      <div class="main-section-container">
+        <!-- video action -->
+        <div class="video-action-section-container">
+          {% include 'video-action/video-action.html' %}
+
+          <!-- video comments -->
+          <div class="video-comment-container">
+            {% include 'video-comments/video-comments.html' %}
+          </div>
+        </div>
+
+        <!-- video suggestions -->
+        <div class="video-suggestion-container">
+          {% include 'video-suggestions/video-suggestions.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

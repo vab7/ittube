@@ -1,0 +1,75 @@
+{% load it_tags %}
+<section class="channels-section">
+  <div class="container">
+    <div class="top-caption">
+      <h1 class="video-content-title">{{ h1 }}</h1>
+      {% if filter_bool %}
+      <div class="filter-comment-container filter-channel-container">
+        <button type="button" class="filter-comment-value filter-channel-value">
+          Новые
+        </button>
+        <span class="new-popular-icon">
+          {% include 'inc/images/filter.html' %}
+        </span>
+      </div>
+      {% endif %}
+    </div>
+    <ul class="channels-list">
+      {% for channel in channel_list %}
+      <li class="channel">
+        <div class="channel-rang-container">
+          <div class="rank">#{{ forloop.counter }}</div>
+          <a href="{{ channel.get_absolute_url }}" class="channels-container">
+            <div class="image-channel">
+              <img
+                src="{{ channel.icon.url }}"
+                alt="{{ channel.title }}"
+                loading="lazy"
+              />
+            </div>
+            <div class="info-channel-container">
+              <div class="title-channel-container">
+                <h2 class="title-channel">{{ channel.title }}</h2>
+                {% include 'inc/images/check.html' %}
+              </div>
+              {% comment %}
+              <div class="channel-count-subscribers-container">
+                <span class="channels-subscribers-count">
+                  {{ channel.subscribers.count|views:'subscribers' }}
+                </span>
+                <span>{{ channel.subscribers.count|subscribers }}</span>
+              </div>
+              {% endcomment %}
+            </div>
+          </a>
+        </div>
+        <form
+          onsubmit="subscribeUserChannel('{{ csrf_token }}', '{{ channel.pk }}')"
+          class="form-channel-add-container"
+        >
+          {% csrf_token %}
+          <button
+            type="button"
+            onclick="subscribeUserChannel('{{ csrf_token }}', '{{ channel.pk }}')"
+            class="button-add-channels"
+          >
+            <span class="channels-button-add-channel button-add-active">
+              <span
+                class="done-icon {% if channel in user_sub.subscribers.all %}icon-active{% endif %}"
+                style="color: var(--secondary-color)"
+              >
+                {% include 'inc/images/done.html' %}
+              </span>
+              <span
+                class="add_box-icon {% if not channel in user_sub.subscribers.all %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/add_box.html' %}
+              </span>
+            </span>
+          </button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

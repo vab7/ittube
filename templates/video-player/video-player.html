@@ -1,0 +1,305 @@
+{% load it_tags %}
+<div id="video_player" class="paused">
+  <video
+    preload="metadata"
+    autoplay
+    id="main-video"
+    src="{% if video.video1080p %}{% url 'stream_video' video.pk 1080 %}{% elif video.video720p %}{% url 'stream_video' video.pk 720 %}{% elif video.video480p %}{% url 'stream_video' video.pk 480 %}{% endif %}"
+  >
+    {% if video.video480p %}
+    <source
+      src="{% url 'stream_video' video.pk 480 %}"
+      size="480"
+      type="video/mp4"
+    />
+    {% endif %} {% if video.video720p %}
+    <source
+      src="{% url 'stream_video' video.pk 720 %}"
+      size="720"
+      type="video/mp4"
+    />
+    {% endif %} {% if video.video1080p %}
+    <source
+      src="{% url 'stream_video' video.pk 1080 %}"
+      size="1080"
+      type="video/mp4"
+    />
+    {% endif %}
+  </video>
+
+  <div class="loader"></div>
+  <div class="black-screen mb"></div>
+
+  <div class="thumbnail-container">
+    <div class="thumbnail">
+      <img src="{{ video.thumbnail.url }}" class="thumbnail-video" />
+    </div>
+    <div class="progressAreaTime">0 :00</div>
+  </div>
+
+  <div class="progress-area-container">
+    <div class="progress-area">
+      <canvas class="bufferedBar"></canvas>
+      <div class="progress-bar">
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="video_double_arrow_left mb">
+    <span class="arrow_left arrow-style-left">
+      {% include 'inc/images/double_left.html' %}
+    </span>
+  </div>
+
+  <div class="video_double_arrow_right mb">
+    <span class="arrow_right arrow-style-right">
+      {% include 'inc/images/double_right.html' %}
+    </span>
+  </div>
+
+  <div class="controls">
+    <div class="keyboard_double_arrow_left mb">
+      <span class="arrow_left">
+        {% include 'inc/images/double_left.html' %}
+      </span>
+    </div>
+
+    <div class="keyboard_double_arrow_right mb">
+      <span class="arrow_right">
+        {% include 'inc/images/double_right.html' %}
+      </span>
+    </div>
+    <div class="pause-screen"></div>
+    <div class="icon play_pause_main">
+      <span class="play-icon-main">
+        {% include 'inc/images/play_arrow.html' %}
+      </span>
+      <span class="pause-icon-main">
+        {% include 'inc/images/pause.html' %}
+      </span>
+    </div>
+    <div class="controls-list">
+      <div class="controls-left">
+        <div class="controls-video-info-fullscreen">
+          <p class="controls-title-video">{{ video.title|truncatechars:80 }}</p>
+          <p class="controls-title-channel">{{ video.channel.title }}</p>
+        </div>
+        <div class="icon pause-icon">
+          <div class="play_pause">
+            <span class="play-icon-lit little-btn">
+              {% include 'inc/images/play_arrow.html' %}
+            </span>
+            <span class="pause-icon-lit little-btn">
+              {% include 'inc/images/pause.html' %}
+            </span>
+          </div>
+        </div>
+        <span class="icon">
+          <div class="volume">
+            <span class="volume_up">
+              {% include 'inc/images/volume_up.html' %}
+            </span>
+            <span class="volume_off">
+              {% include 'inc/images/volume_off.html' %}
+            </span>
+          </div>
+
+          <input type="range" min="0" max="100" class="volume_range" />
+
+          <div class="timer">
+            <span class="current">0:00</span> /
+            <span class="duration">0:00</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="controls-right">
+        <div class="icon settingsBtn">
+          <span class="settings-icon">
+            {% include 'inc/images/settings.html' %}
+          </span>
+          <span class="settings-icon-fill">
+            {% include 'inc/images/settings_fill.html' %}
+          </span>
+        </div>
+
+        <div class="icon fullscreen-icon fullscreen">
+          <span class="fullscreen-svg">
+            {% include 'inc/images/fullscreen.html' %}
+          </span>
+          <span class="fullscreen-exit-svg">
+            {% include 'inc/images/fullscreen_exit.html' %}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="actions-channel-container">
+        <div class="actions-channel-icon">
+          <img
+            src="{{ video.channel.icon.url }}"
+            class="action-channel-img-icon"
+            alt="video.channel.alt_icon"
+          />
+        </div>
+        <div class="actions-channel-info">
+          <div class="actions-channel-info-container">
+            <p class="actions-channel-title">{{ video.channel.title }}</p>
+            {% include 'inc/images/check.html' %}
+          </div>
+          <p class="actions-channel-subscribers">
+            {% comment %}
+            <span class="action-channel-subscribers-count"
+              >{{ video.channel.subscribers.count }}</span
+            >
+            {% endcomment %}
+            <span class="actions-channel-subscribers-text"
+              >{{ video.channel.fake_subscribers|views:'subscribers' }}
+              подписчиков</span
+            >
+          </p>
+        </div>
+        <form
+          onsubmit="return subscribeUserChannel('{{ csrf_token }}', '{{ video.channel.pk }}')"
+          class="actions-subscribe-form"
+        >
+          {% csrf_token %}
+          <button
+            type="button"
+            onclick="subscribeUserChannel('{{ csrf_token }}', '{{ video.channel.pk }}')"
+            class="subscribe-container"
+          >
+            <span
+              class="sub-icon add_box-icon {% if not subscribe_status %}icon-active{% endif %}"
+            >
+              {% include 'inc/images/add_box.html' %}
+            </span>
+            <span
+              class="sub-icon done-icon {% if subscribe_status %}icon-active{% endif %}"
+              style="color: var(--secondary-color)"
+            >
+              {% include 'inc/images/done.html' %}
+            </span>
+          </button>
+        </form>
+      </div>
+      <div class="actions-container-icons">
+        <form
+          onsubmit="return addVideoLike('{{ csrf_token }}', '{{ video.pk }}')"
+          class="like-form"
+        >
+          {% csrf_token %}
+          <button
+            type="button"
+            onclick="addVideoLike('{{ csrf_token }}', '{{ video.pk }}')"
+            class="action-user-button button-like"
+          >
+            <div class="action-icon like-icon">
+              <span
+                class="like-i {% if not like_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/thumb_up.html' %}
+              </span>
+              <span
+                class="like-i-fill {% if like_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/thumb_up_fill.html' %}
+              </span>
+            </div>
+          </button>
+        </form>
+        <form
+          onsubmit="return addVideoDislike('{{ csrf_token }}', '{{ video.pk }}')"
+          class="dislike-form"
+        >
+          {% csrf_token %}
+          <button
+            type="button"
+            onclick="addVideoDislike('{{ csrf_token }}', '{{ video.pk }}')"
+            class="action-user-button button-dislike"
+          >
+            <span class="action-icon dislike-icon">
+              <span
+                class="dislike-i {% if not dislike_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/thumb_down.html' %}
+              </span>
+              <span
+                class="dislike-i-fill {% if dislike_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/thumb_down_fill.html' %}
+              </span>
+            </span>
+          </button>
+        </form>
+        <form
+          onsubmit="return addVideoFavorite('{{ csrf_token }}', '{{ video.pk }}')"
+          class="favorite-form"
+        >
+          {% csrf_token %}
+          <button
+            type="button"
+            onclick="addVideoFavorite('{{ csrf_token }}', '{{ video.pk }}')"
+            class="action-user-button button-favorite"
+          >
+            <span class="action-icon favorite-icon">
+              <span
+                class="favorite-i {% if not favorite_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/favorite.html' %}
+              </span>
+              <span
+                class="favorite-i-fill {% if favorite_status %}icon-active{% endif %}"
+              >
+                {% include 'inc/images/favorite_fill.html' %}
+              </span>
+            </span>
+          </button>
+        </form>
+        <button class="action-user-button button-share">
+          <span class="action-icon share-icon">
+            {% include 'inc/images/share.html' %}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings">
+    <div data-label="settingHome">
+      <ul>
+        <li data-label="speed">
+          {% include 'inc/images/time-fast.html' %}
+          <span class="video-menu">Скорость</span>
+        </li>
+        <li data-label="quality">
+          {% include 'inc/images/hd.html' %}
+          <span class="video-menu">Качество</span>
+        </li>
+      </ul>
+    </div>
+    <div class="playback" data-label="speed" hidden>
+      <span class="settings-back-container">
+        <span class="video-menu">Скорость</span>
+      </span>
+      <ul>
+        <li data-speed="0.5" class="video-menu">0.5</li>
+
+        <li data-speed="1" class="active video-menu">Обычная</li>
+
+        <li data-speed="1.5" class="video-menu">1.5</li>
+
+        <li data-speed="2" class="video-menu">2</li>
+      </ul>
+    </div>
+    <div data-label="quality" class="quality" hidden>
+      <span class="settings-back-container">
+        <span class="video-menu">Качество</span>
+      </span>
+      <ul>
+        <li data-quality="auto" class="active video-menu">Авто</li>
+      </ul>
+    </div>
+  </div>
+</div>

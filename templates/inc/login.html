@@ -1,0 +1,25 @@
+<section class="register-section">
+   <div class="registration-form item">
+      <p class="simple-text text-bottom">Вход</p>
+      {% if form.errors %}
+      <p>{{ form.errors.error }}</p>
+      {% endif %}
+      <p class="error-text hidden"></p>
+      <div class="fields-input">
+         <form method="POST" class="form-register-conainer">
+            {% csrf_token %} {{ form }}
+            <div class="buttons-action">
+               <a
+                  href="{% url 'register_user' %}"
+                  class="sign-in-button button-menu-act"
+               >
+                  Зарегистрироваться
+               </a>
+               <button type="submit" class="log-in-button button-menu-act">
+                  Войти
+               </button>
+            </div>
+         </form>
+      </div>
+   </div>
+</section>

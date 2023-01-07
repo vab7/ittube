@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block content %}
+<section class="saved-video-section">
+   <div class="container">
+      <div class="seved-video">
+         <div class="video-content-title">Поиск: "{{ search }}"</div>
+      </div>
+      <ul class="video-content-container infinite-container">
+         {% for video in video_list %}
+            {% include 'inc/video-suggestion.html'%}
+         {% endfor %}
+      </ul>
+
+      <div class="loader-container">
+         <div class="loader-ul-content"></div>
+      </div>
+
+      {% if page_obj.has_next %}
+         <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+      {% endif %}
+   </div>
+</section>
+{% endblock content %}

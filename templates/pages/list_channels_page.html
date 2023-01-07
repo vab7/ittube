@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/channel.css' %}" />
+{% endblock css %}
+
+{% block js %}
+<script src="{% static 'js/video-action.js' %}"></script>
+<script src="{% static 'js/header.js' %}"></script>
+<script src="{% static 'js/channel-page.js' %}"></script>
+<script src="{% static 'js/channel-list.js' %}"></script>
+{% endblock js %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block content %}
+{% include 'inc/channel.html' %}
+{% endblock content %}

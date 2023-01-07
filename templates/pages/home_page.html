@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+<!---->
+
+{% block jsbefore %}
+<script>
+  window.onload = function () {
+    const script1 = document.createElement("script");
+    script1.src = "/static/js/video-content.js";
+    document.body.append(script1);
+
+    const script2 = document.createElement("script");
+    script2.src = "/static/js/header.js";
+    document.body.append(script2);
+
+    const script3 = document.createElement("script");
+    script3.src = "/static/js/category.js";
+    document.body.append(script3);
+  };
+</script>
+{% endblock jsbefore %}
+<!---->
+
+{% load it_tags %}
+<!---->
+{% block title %}{{ title }}{% endblock title %}
+<!---->
+
+{% block category %}{% get_categories request %}{% endblock category %}
+<!---->
+
+{% block content %}{% include 'inc/video_content.html' %}{% endblock content %}

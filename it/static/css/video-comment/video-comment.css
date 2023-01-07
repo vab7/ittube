@@ -1,0 +1,244 @@
+.comment-section .container {
+   padding: 0 17px 17px 17px;
+}
+
+.user-comment-container {
+   display: flex;
+   gap: 10px;
+}
+
+.comments-list-container {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.info-comment-container {
+   display: flex;
+   justify-content: space-between;
+}
+
+.filter-comment-container {
+   display: flex;
+   align-items: center;
+   gap: 2px;
+   cursor: pointer;
+   margin-bottom: 12px;
+}
+
+.filter-comment-container svg {
+   margin-top: 1px;
+}
+
+.all-comments-text {
+   color: white;
+   font-size: 14px;
+   font-family: sans-serif;
+}
+
+.chat-icon svg {
+   width: 16px;
+   height: 16px;
+}
+
+.symbols-send {
+   width: 24px;
+   height: 24px;
+}
+
+.symbols-send svg {
+   fill: white;
+   width: 24px;
+   height: 24px;
+}
+
+.filter-comment-value {
+   color: var(--third-color);
+   background: transparent;
+   border: none;
+   cursor: pointer;
+}
+
+.publish-comment-container {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+.user-field-comment {
+   width: 100%;
+}
+
+.user-icon svg {
+   width: 35px;
+   height: 35px;
+}
+
+.field-comment-input {
+   width: 100%;
+   border: none;
+   background: transparent;
+   border-bottom: var(--default-border);
+   outline: none;
+   color: var(--third-color);
+   padding-bottom: 7px;
+}
+
+.form-comment-container {
+   display: flex;
+   position: relative;
+}
+
+.button-send-comment {
+   display: none;
+   border: none;
+   background: transparent;
+   cursor: pointer;
+}
+
+.comment-close-icon {
+   position: absolute;
+   visibility: hidden;
+   right: 50px;
+}
+
+.comment-close-icon svg {
+   width: 13px;
+   height: 13px;
+   fill: #555;
+}
+
+.button-send-comment .material-symbols-rounded {
+   color: var(--third-color);
+   cursor: pointer;
+}
+
+.field-comment-input {
+   padding-right: 50px;
+}
+
+.field-comment-input:not(:placeholder-shown) ~ .button-send-comment {
+   width: auto;
+   display: flex;
+   align-items: center;
+   margin-left: 10px;
+}
+
+.form-comment-container .g-recaptcha {
+   display: none;
+   position: absolute;
+   right: 0;
+   top: 50px;
+}
+
+.field-comment-input:not(:placeholder-shown) ~ .g-recaptcha {
+   display: block;
+}
+
+.field-comment-input:not(:placeholder-shown) ~ .comment-close-icon {
+   visibility: visible;
+}
+
+.comment-review-container {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.comment-review {
+   display: flex;
+   gap: 10px;
+   margin-left: 45px;
+}
+
+.button-filter-comment {
+   background: transparent;
+   border: none;
+   color: var(--third-color);
+   cursor: pointer;
+}
+
+.comment {
+   display: flex;
+   flex-direction: column;
+   gap: 25px;
+}
+
+.comment-container {
+   font-family: sans-serif;
+   font-size: 13px;
+   color: var(--secondary-color);
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+.comments-users-ul {
+   display: flex;
+   flex-direction: column;
+   gap: 26px;
+   font-family: sans-serif;
+}
+
+.comment-user-icon svg {
+   width: 35px;
+   height: 35px;
+}
+
+.comment-top-container {
+   display: flex;
+   gap: 10px;
+}
+
+.comment-username {
+   color: var(--third-color);
+}
+
+.comment-bottom-container {
+   display: flex;
+   align-items: center;
+   gap: 6px;
+   margin-left: -3px;
+}
+
+.comment-item-container {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+   cursor: pointer;
+   padding: 4px 3px 2px 3px;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.comment-item-container:active {
+   background: var(--transparent);
+}
+
+.comment-bottom-container .material-symbols-rounded {
+   font-size: 14px;
+}
+
+.button-review {
+   color: var(--primary-color);
+}
+
+.review-hidden {
+   display: none;
+}
+
+.button-comment-like {
+   background: transparent;
+   border: none;
+   display: flex;
+   gap: 3px;
+   cursor: pointer;
+}
+
+.new-comment-like:visited {
+   background: red;
+}
+
+.form-comment-container label {
+   display: none;
+}

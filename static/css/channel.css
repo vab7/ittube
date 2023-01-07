@@ -1,0 +1,188 @@
+.channels-list {
+   display: flex;
+   flex-flow: wrap;
+   justify-content: flex-start;
+   gap: 20px;
+}
+
+.channels-section .container {
+   padding: 0 10px;
+}
+
+.top-caption {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.channel-rang-container {
+   display: flex;
+}
+
+.filter-comment-value {
+   color: var(--third-color);
+   background: transparent;
+   border: none;
+   cursor: pointer;
+}
+
+.new-popular-icon svg {
+   margin-top: 4px;
+}
+
+.filter-channel-container {
+   display: flex;
+   gap: 3px;
+}
+
+.icon-active {
+   display: block !important;
+}
+
+.done-icon svg {
+   width: 25px;
+   height: 25px;
+}
+
+.like-i,
+.like-i-fill,
+.dislike-i,
+.dislike-i-fill,
+.favorite-i,
+.favorite-i-fill,
+.share-i,
+.share-i-fill,
+.add_box-icon,
+.done-icon {
+   display: none;
+}
+
+.add_box-icon svg {
+   width: 25px;
+   height: 25px;
+   fill: var(--primary-color);
+}
+
+.sort-by {
+   display: flex;
+   cursor: pointer;
+}
+
+.sort-text {
+   color: var(--third-color);
+   font-weight: bold;
+}
+
+.sort-image {
+   display: flex;
+   margin-top: 1px;
+   margin-left: 5px;
+}
+
+.rank {
+   font-size: 12px;
+   font-family: sans-serif;
+   color: var(--secondary-color);
+   margin-right: 5px;
+}
+
+.pornstar {
+   color: var(--third-color);
+}
+
+.channel {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.channels-container {
+   width: 100%;
+   display: flex;
+}
+
+.info-channel-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   margin-left: 12px;
+}
+
+.channel-link-image {
+   display: flex;
+}
+
+.channel-link-title {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
+.image-channel {
+   display: flex;
+   justify-content: center;
+   width: 45px;
+   height: 45px;
+   border-radius: 50%;
+   overflow: hidden;
+}
+
+.image-channel img {
+   height: 100%;
+}
+
+.title-channel-container {
+   display: flex;
+   align-items: center;
+}
+
+.title-channel-container svg {
+   width: 15px;
+   height: 15px;
+   margin-left: 5px;
+}
+
+.title-channel {
+   color: var(--third-color);
+   font-size: 16px;
+   font-family: sans-serif;
+   font-weight: bold;
+   letter-spacing: 0.3px;
+}
+
+.button-subscribe:hover {
+   background: var(--primary-color);
+   color: white;
+}
+
+.button-add-channels {
+   cursor: pointer;
+   width: 50px;
+   background: transparent;
+   border: none;
+}
+
+.channels-button-add-channel {
+   font-variation-settings: "FILL" 0, "wght" 300 !important;
+   color: var(--primary-color);
+}
+
+.button-add-active {
+   color: var(--secondary-color) !important;
+}
+
+.form-channel-add-container {
+   display: flex;
+   align-items: center;
+   transform: translateX(7px);
+}
+
+@media screen and (min-width: 992px) {
+   .image-channel img {
+      width: 50px;
+   }
+
+   .channels-list {
+      gap: 30px;
+   }
+}

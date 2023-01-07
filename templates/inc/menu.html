@@ -1,0 +1,69 @@
+{% load it_tags %}
+<!---->
+{% get_menu as menu_all %}
+<!---->
+
+{% get_current_path request as path %}
+<nav class="menu-nav menu-hidden">
+  <hr class="lp" />
+  <div class="menu">
+    <div class="top-menu mb">
+      <div class="logo-icon">
+        <a href="{% url 'home_page' %}">
+          {% include 'inc/images/logo.html' %}
+        </a>
+      </div>
+      <div class="button-close-menu">{% include 'inc/images/close.html' %}</div>
+    </div>
+    <div class="container">
+      <div class="list-items-menu">
+        <div class="user-acc item mb">
+          <div class="user-bg-img">{% include 'inc/images/user.html' %}</div>
+          <div class="user-inf">
+            <div class="user-name-acc">
+              <span class="user-name">
+                {% if not user.is_authenticated %}
+                <!---->
+                {{ user_id }}
+                <!---->
+                {% else %}
+                <!---->
+                {{ user }}
+                <!---->
+
+                {% endif %}
+              </span>
+            </div>
+            <div class="user-subscribes-acc">
+              <span class="user-subscribes">Вы подписаны:</span>
+              <span class="user-subscribes-value">{{ user_subscribers }}</span>
+            </div>
+          </div>
+        </div>
+        <hr class="mb" />
+        <div class="menu-list item">
+          <p class="simple-text text-bottom mb">Видео</p>
+          <ul class="menu-container">
+            {% for menu in menu_all %}
+            <li class="item-menu">
+              <a
+                href="{% url menu.slug %}"
+                class="item-menu-link {% if path == menu.slug %}menu-active{% endif %}"
+              >
+                <div class="icon-home mb">{% include menu.icon %}</div>
+                <span class="item-text">{{ menu.title }}</span>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="auth-menu mb">
+          <div class="menu-list item">
+            <li class="item-menu">{% include 'inc/auth.html' %}</li>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-overlay overlay-hidden"></div>
+</nav>

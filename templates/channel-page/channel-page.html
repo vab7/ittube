@@ -1,0 +1,136 @@
+{% load it_tags %}
+<section class="channel-section">
+  <div class="container">
+    <div class="cap-channel-container">
+      <div class="cap-channel-img">
+        {% if channel.cap %}
+        <img
+          src="{{ channel.cap.url }}"
+          class="channel-cap"
+          alt="{{ channel.title }}"
+        />
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="container-channel-main">
+      <div class="channel-container-main">
+        <div class="main-channel-container">
+          <div class="channel-info-main-container">
+            <div class="channel-info-start-container">
+              <div class="icon-channel-img">
+                <img
+                  src="{{ channel.icon.url }}"
+                  class="channel-icon"
+                  alt="{{ channel.title }}"
+                />
+              </div>
+              <div class="channel-main-title-container">
+                <div class="channel-info-main-title-container">
+                  <h1 class="channel-info-main-title">{{ channel.title }}</h1>
+                  {% include 'inc/images/check.html' %}
+                </div>
+                <div class="channel-count-subscribers-container">
+                  <div class="channel-count-subscribers-container">
+                    <span class="channel-subscribers-count">
+                      {{ channel.fake_subscribers|views:'subscribers' }}
+                      подписчиков
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="channel-info-end-container">
+              <div class="channel-info-stats-container">
+                <span class="channel-videos-all"
+                  >{{ channel_video_count }} видео</span
+                >
+                {% comment %} <span class="point">•</span>
+                <div class="channel-views-container">
+                  <span class="channel-views-value">{{ channel_views }}</span>
+                  <span class="channel-views-text"
+                    >{{ channel_views|views_text }}</span
+                  >
+                </div>
+                {% endcomment %}
+                <span class="point">•</span>
+                <div class="channel-likes-container">
+                  <span class="channel-likes-value"
+                    >{{ channel_likes|views:'subscirbes' }}</span
+                  >
+                  <span class="channel-likes-value"
+                    >{{ channel_likes|likes_text }}</span
+                  >
+                </div>
+              </div>
+              <div class="channel-subscirbe-main-container">
+                <form
+                  class="subscribe-form"
+                  onsubmit="return subscribeUserChannel('{{ csrf_token }}', '{{ channel.pk }}')"
+                >
+                  {% csrf_token %}
+                  <button
+                    type="button"
+                    onclick="subscribeUserChannel('{{ csrf_token }}', '{{ channel.pk }}')"
+                    class="channel-main-action-subscribe-button {% if subscribe_status %}subscribe-active{% endif %}"
+                  >
+                    {% if subscribe_status %} вы подписаны {% else %}
+                    подписаться {% endif %}
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="channel-info-container-main">
+      <div class="channel-info-show-container channel-info-hidden">
+        <div class="channel-section-info-bio-container">
+          {% if channel.bio %}
+          <div class="channel-info-section bio-section">
+            <span class="article-channel">Описание</span>
+            <p>{{ channel.bio }}</p>
+          </div>
+          {% endif %}
+        </div>
+        <div class="channel-section-info-container">
+          {% if channel.added_on %}
+          <div class="channel-info-section">
+            <span class="article-channel">Дата регистрации</span>
+            <p class="text-channel">{{ channel.added_on }}</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="show-info-channel-container">
+        <div class="show-info-channel-line left-channel-line"></div>
+        <span class="show-info-channel-text">показать описание</span>
+        <div class="show-info-channel-line right-channel-line"></div>
+      </div>
+    </div>
+
+    <div class="channel-videos-main-container">
+      <div class="container-channel-videos">
+        <ul class="video-content-container infinite-container">
+          {% for video in videos %}
+          <!---->
+          {% include 'inc/video-suggestion.html' %}
+          <!---->
+          {% endfor %}
+        </ul>
+        <div class="loader-container">
+          <div class="loader-ul-content"></div>
+        </div>
+
+        {% if page_obj.has_next %}
+        <a
+          class="infinite-more-link"
+          href="?page={{ page_obj.next_page_number }}"
+        ></a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

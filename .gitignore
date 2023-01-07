@@ -1,0 +1,12 @@
+/venv
+/db.sqlite3
+/.env
+/site_cache
+
+**/media
+
+**/__pycache__
+
+/conf
+
+**/migrations

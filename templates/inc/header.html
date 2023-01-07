@@ -1,0 +1,43 @@
+<header class="header">
+   <div class="header-top">
+      <div class="container">
+         <div class="header-main">
+            <div class="button-cancel-search hidden mb">Назад</div>
+            <div class="logo-icon">
+               <a href="{% url 'home_page' %}">
+                  {% include 'inc/images/logo.html' %}
+               </a>
+            </div>
+            <div class="header-right">
+               <div class="search search-hidden">
+                  <form action="{% url 'search' %}" method="GET" class="search-form">
+                     {% csrf_token %}
+                     <div class="search-container">
+                        <input
+                           type="text"
+                           class="field-str-input search-input search-input-hidden"
+                           name="search"
+                           placeholder="Поиск по сайту"
+                        />
+                        <div class="input-close-icon">
+                           {% include 'inc/images/close.html' %}
+                        </div>
+                     </div>
+                     <div class="button-container">
+                        <button type="submit" class="search-button" aria-label="search">
+                           {% include 'inc/images/search.html' %}
+                        </button>
+                        <div class="search-button-permission visible"></div>
+                     </div>
+                  </form>
+               </div>
+               <div class="button-menu visible">
+                  {% include 'inc/images/menu.html' %}
+               </div>
+            </div>
+            {% include 'inc/auth.html' %}
+         </div>
+      </div>
+   </div>
+   {% include 'inc/menu.html' %}
+</header>

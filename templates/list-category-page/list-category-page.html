@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/category-list/category-list.css' %}" />
+{% endblock css %}
+
+{% block js %}
+<script src="{% static 'js/header.js' %}"></script>
+{% endblock js %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block content %}
+<section class="category-list-section">
+   <div class="container">
+      <div class="category-list">
+         <div class="seved-video">
+            <h1 class="video-content-title">{{ sub_title }}</h1>
+         </div>
+
+         <ul class="category-content-container video-content-container infinite-container">
+            {% for category in category_list %}
+               {% include 'list-category-page/category.html' %}
+            {% endfor %}
+         </ul>
+
+         <div class="loader-container">
+            <div class="loader-ul-content"></div>
+         </div>
+
+         {% if page_obj.has_next %}
+            <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+         {% endif %}
+      </div>
+   </div>
+</section>
+{% endblock content %}

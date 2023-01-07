@@ -1,0 +1,100 @@
+{% load it_tags %}
+<section class="comment-section">
+  <div class="container">
+    <div class="comments-list-container">
+      <div class="info-comment-container">
+        <div class="all-comments-container">
+          <span class="all-comments-text"
+            >Комментарии: {{ video.comment_set.count }}</span
+          >
+        </div>
+        <div class="filter-comment-container">
+          <button type="button" class="filter-comment-value">Новые</button>
+          {% include 'inc/images/filter.html' %}
+        </div>
+      </div>
+
+      <div class="publish-comment-container">
+        <div class="user-icon">{% include 'inc/images/user.html' %}</div>
+        <div class="user-field-comment">
+          <form
+            onsubmit="return addComment('{{ csrf_token }}', '{{ video.pk }}', '{% if user.is_authenticated %}{{ user.pk }}{% else %}{{ user_id.pk }}{% endif %}', '{% if user.is_authenticated %}{{ user }}{% else %}{{ user_id }}{% endif %}');"
+            class="form-comment-container"
+            id="form-comment"
+          >
+            {% csrf_token %}
+            <input type="hidden" name="parent" id="comment-review" value="" />
+            {{ form }}
+            <div class="comment-close-icon">
+              {% include 'inc/images/close.html' %}
+            </div>
+            <button
+              type="button"
+              onclick="addComment('{{ csrf_token }}', '{{ video.pk }}', '{% if user.is_authenticated %}{{ user.pk }}{% else %}{{ user_id.pk }}{% endif %}', '{% if user.is_authenticated %}{{ user }}{% else %}{{ user_id }}{% endif %}')"
+              class="button-send-comment"
+            >
+              <span class="symbols-send">
+                {% include 'inc/images/send.html' %}
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="comments-container">
+        <ul class="comments-users-ul">
+          {% for comment in video.get_comment %}
+          <li class="comment">
+            <div class="user-comment-container">
+              <div class="comment-user-icon">
+                {% include 'inc/images/user.html' %}
+              </div>
+              <div class="comment-container">
+                <div class="comment-top-container">
+                  <span class="comment-username">{{ comment.user }}</span>
+                </div>
+                <div class="comment-text-container">{{ comment.text }}</div>
+                <div class="comment-bottom-container">
+                  <div class="comment-item-container reviews">
+                    <span class="chat-icon">
+                      {% include 'inc/images/chat.html' %}
+                    </span>
+                    <span>{{ comment.comment_set.count }}</span>
+                  </div>
+                  <span>•</span>
+                  <div class="comment-item-container">
+                    <a
+                      href="#add-comment"
+                      onclick="addReview('{{ comment.user }}', '{{ comment.id }}')"
+                      class="button-review"
+                    >
+                      Ответить
+                    </a>
+                  </div>
+                  <span>•</span>
+                  <span>{{ comment.added_on|added }} назад</span>
+                </div>
+              </div>
+            </div>
+            <div class="comment-review-container review-hidden">
+              {% for review in comment.comment_set.all %}
+              <div class="comment-review">
+                <div class="comment-user-icon">
+                  {% include 'inc/images/user.html' %}
+                </div>
+                <div class="comment-container">
+                  <div class="comment-top-container">
+                    <span class="comment-username">{{ review.user }}</span>
+                  </div>
+                  <div class="comment-text-container">{{ review.text }}</div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

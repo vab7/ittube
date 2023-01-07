@@ -1,0 +1,29 @@
+{% load it_tags %}
+<section class="video-content">
+  <div class="container">
+    <div class="watch-main-container">
+      <div class="h1-container">
+        <h1 class="video-content-title">{{ h1 }}</h1>
+      </div>
+
+      <ul class="video-content-container infinite-container">
+        {% for video in video_list %}
+        <!---->
+        {% include 'inc/video-suggestion.html'%}
+        <!---->
+        {% endfor %}
+      </ul>
+
+      <div class="loader-container">
+        <div class="loader-ul-content"></div>
+      </div>
+
+      {% if page_obj.has_next %}
+      <a
+        class="infinite-more-link"
+        href="?page={{ page_obj.next_page_number }}"
+      ></a>
+      {% endif %}
+    </div>
+  </div>
+</section>
